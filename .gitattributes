@@ -1,0 +1,6 @@
+* text=auto
+
+*.sln text eol=crlf
+.editorconfig text eol=crlf
+
+*.cs text eol=lf

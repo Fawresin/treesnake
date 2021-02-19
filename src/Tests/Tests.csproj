@@ -48,6 +48,15 @@
       <HintPath>..\..\packages\NUnit.3.13.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ScannerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Treesnake\Treesnake.csproj">
+      <Project>{be6900fa-7cf8-4928-ac3a-cda6fbe22983}</Project>
+      <Name>Treesnake</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

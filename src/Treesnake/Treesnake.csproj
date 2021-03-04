@@ -42,7 +42,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\Exceptions.cs" />
+    <Compile Include="Parser\Errors.cs" />
     <Compile Include="Parser\Scanner.cs" />
     <Compile Include="Parser\Token.cs" />
     <Compile Include="Program.cs" />

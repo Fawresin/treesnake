@@ -26,9 +26,9 @@ using System;
 namespace Treesnake.Parser
 {
     /// <summary>
-    /// A parser exception.
+    /// A parser error.
     /// </summary>
-    public abstract class ParserException : Exception
+    public abstract class ParserError : Exception
     {
         /// <summary>
         /// Starting offset in the input string.
@@ -36,12 +36,12 @@ namespace Treesnake.Parser
         public int Offset { get; }
 
         /// <summary>
-        /// Starting line where the exception occurred.
+        /// Starting line where the error occurred.
         /// </summary>
         public int Line { get; }
 
         /// <summary>
-        /// Starting column where the exception occurred.
+        /// Starting column where the error occurred.
         /// </summary>
         public int Column { get; }
 
@@ -49,10 +49,10 @@ namespace Treesnake.Parser
         /// Constructor.
         /// </summary>
         /// <param name="offset">Starting offset in the input string</param>
-        /// <param name="line">Starting line where the exception occurred.</param>
-        /// <param name="column">Starting column where the exception occurred.</param>
-        /// <param name="message">Exception message.</param>
-        public ParserException(int offset, int line, int column, string message) : base(message)
+        /// <param name="line">Starting line where the error occurred.</param>
+        /// <param name="column">Starting column where the error occurred.</param>
+        /// <param name="message">Error message.</param>
+        public ParserError(int offset, int line, int column, string message) : base(message)
         {
             Offset = offset;
             Line = line;
@@ -64,15 +64,20 @@ namespace Treesnake.Parser
     /// Raised when there is an unexpected indent or when an unindent level
     /// doesn't match any outer indent level.
     /// </summary>
-    public class IndentationException : ParserException
+    public class IndentationError : ParserError
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="offset">Starting offset in the input string</param>
-        /// <param name="line">Starting line where the exception occurred.</param>
-        /// <param name="column">Starting column where the exception occurred.</param>
+        /// <param name="line">Starting line where the error occurred.</param>
+        /// <param name="column">Starting column where the error occurred.</param>
         /// <param name="message">Exception message.</param>
-        public IndentationException(int offset, int line, int column, string message) : base(offset, line, column, message) { }
+        public IndentationError(int offset, int line, int column, string message) : base(offset, line, column, message) { }
+    }
+
+    public class SyntaxError : ParserError
+    {
+        public SyntaxError(int offset, int line, int column, string message) : base(offset, line, column, message) { }
     }
 }

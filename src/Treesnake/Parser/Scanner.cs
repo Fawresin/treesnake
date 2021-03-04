@@ -106,7 +106,7 @@ namespace Treesnake.Parser
         /// Gets the next token in the input string.
         /// </summary>
         /// <returns>A token.</returns>
-        /// <exception cref="IndentationException">Raised when an unindent level doesn't match any previous indent level.</exception>
+        /// <exception cref="IndentationError">Raised when an unindent level doesn't match any previous indent level.</exception>
         public Token GetNextToken()
         {
             var token = DoIndent();
@@ -531,7 +531,7 @@ namespace Treesnake.Parser
         /// Consumes an indent and gets the next indent or dedent token.
         /// </summary>
         /// <returns>An indent or dedent token, or null if none.</returns>
-        /// <exception cref="IndentationException">Raised when an unindent doesn't match any previous indent level.</exception>
+        /// <exception cref="IndentationError">Raised when an unindent doesn't match any previous indent level.</exception>
         private Token DoIndent()
         {
             int startOffset = currentOffset;
@@ -597,7 +597,7 @@ namespace Treesnake.Parser
                 indentSizes.Pop();
                 if (indentSizes.Count == 1 && currentIndentSize > indentSizes.Peek())
                 {
-                    throw new IndentationException(startOffset, currentLine, startColumn, "Unindent doesn't match any previous indent level.");
+                    throw new IndentationError(startOffset, currentLine, startColumn, "Unindent doesn't match any previous indent level.");
                 }
 
                 return CreateToken(TokenType.Dedent, startOffset, currentLine, startColumn);

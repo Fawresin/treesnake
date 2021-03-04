@@ -274,7 +274,7 @@ namespace Tests
 
             var scanner = AssertTokens(input, expected);
 
-            Assert.Throws<IndentationException>(() => scanner.GetNextToken());
+            Assert.Throws<IndentationError>(() => scanner.GetNextToken());
         }
 
         [Test]

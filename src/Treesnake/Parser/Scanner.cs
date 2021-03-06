@@ -606,7 +606,7 @@ namespace Treesnake.Parser
             return null;
         }
 
-                /// <summary>
+        /// <summary>
         /// Consumes a comment.
         /// </summary>
         /// <returns>Comment token.</returns>

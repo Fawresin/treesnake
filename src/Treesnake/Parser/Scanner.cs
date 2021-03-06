@@ -148,7 +148,7 @@ namespace Treesnake.Parser
                             break;
                         }
 
-                        SkipAhead();
+                        Advance();
                         AddLine();
                         break;
 
@@ -185,7 +185,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.PlusEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -197,7 +197,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.MinusEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -209,17 +209,17 @@ namespace Treesnake.Parser
                         if (PeekAhead(2) == "*=")
                         {
                             token = CreateToken(TokenType.DoubleStarEqual);
-                            SkipAhead(2);
+                            Advance(2);
                         }
                         else if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.StarEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else if (PeekAhead() == '*')
                         {
                             token = CreateToken(TokenType.DoubleStar);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -231,17 +231,17 @@ namespace Treesnake.Parser
                         if (PeekAhead(2) == "/=")
                         {
                             token = CreateToken(TokenType.DoubleSlashEqual);
-                            SkipAhead(2);
+                            Advance(2);
                         }
                         else if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.SlashEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else if (PeekAhead() == '/')
                         {
                             token = CreateToken(TokenType.DoubleSlash);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -276,7 +276,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.AmpersandEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -288,17 +288,17 @@ namespace Treesnake.Parser
                         if (PeekAhead(2) == "<=")
                         {
                             token = CreateToken(TokenType.LeftShiftEqual);
-                            SkipAhead(2);
+                            Advance(2);
                         }
                         else if (PeekAhead() == '<')
                         {
                             token = CreateToken(TokenType.LeftShift);
-                            SkipAhead();
+                            Advance();
                         }
                         else if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.LessThanEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -310,17 +310,17 @@ namespace Treesnake.Parser
                         if (PeekAhead(2) == ">=")
                         {
                             token = CreateToken(TokenType.RightShiftEqual);
-                            SkipAhead(2);
+                            Advance(2);
                         }
                         else if (PeekAhead() == '>')
                         {
                             token = CreateToken(TokenType.RightShift);
-                            SkipAhead();
+                            Advance();
                         }
                         else if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.GreaterThanEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -332,7 +332,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.PercentEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -348,7 +348,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.CircumflexEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -360,7 +360,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.VerticalBarEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -372,7 +372,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.EqualEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         else
                         {
@@ -384,7 +384,7 @@ namespace Treesnake.Parser
                         if (PeekAhead() == '=')
                         {
                             token = CreateToken(TokenType.NotEqual);
-                            SkipAhead();
+                            Advance();
                         }
                         break;
 
@@ -409,7 +409,7 @@ namespace Treesnake.Parser
                 if (currentOffset < input.Length)
                 {
                     // Safe guard so it doesn't skip too far.
-                    SkipAhead();
+                    Advance();
                 }
 
                 if (token != null)
@@ -520,8 +520,8 @@ namespace Treesnake.Parser
         /// <summary>
         /// Sets the offset ahead by a number of characters.
         /// </summary>
-        /// <param name="numOfChars">How far ahead to skip.</param>
-        private void SkipAhead(int numOfChars = 1)
+        /// <param name="numOfChars">How far ahead to advance.</param>
+        private void Advance(int numOfChars = 1)
         {
             currentOffset += numOfChars;
             currentColumn += numOfChars;
@@ -580,7 +580,7 @@ namespace Treesnake.Parser
                         break;
                     }
 
-                    SkipAhead();
+                    Advance();
                 }
             }
 
@@ -626,7 +626,7 @@ namespace Treesnake.Parser
                         case TokenType.Comment:
                         case TokenType.Error:
                             // Consume the newline.
-                            SkipAhead();
+                            Advance();
                             AddLine();
                             break;
                         default:
@@ -637,7 +637,7 @@ namespace Treesnake.Parser
                     break;
                 }
 
-                SkipAhead();
+                Advance();
             }
             
             return CreateToken(TokenType.Comment, startOffset, startLine, startColumn, input.Substring(startOffset, currentOffset - startOffset + (addOne ? 1 : 0)) );
@@ -660,7 +660,7 @@ namespace Treesnake.Parser
                     break;
                 }
 
-                SkipAhead();
+                Advance();
             }
 
             return CreateToken(TokenType.Name, startOffset, currentLine, startColumn, input.Substring(startOffset, currentOffset - startOffset + 1));
@@ -728,7 +728,7 @@ namespace Treesnake.Parser
                     break;
                 }
 
-                SkipAhead();
+                Advance();
             }
 
             return CreateToken(type, startOffset, currentLine, startColumn, input.Substring(startOffset, currentOffset - startOffset + 1));
@@ -751,7 +751,7 @@ namespace Treesnake.Parser
             int startColumn = currentColumn;
             while (currentOffset < input.Length)
             {
-                SkipAhead();
+                Advance();
                 if (!IsHexadecimalCharacter(PeekAhead()))
                 {
                     break;
@@ -778,7 +778,7 @@ namespace Treesnake.Parser
             int startColumn = currentColumn;
             while (currentOffset < input.Length)
             {
-                SkipAhead();
+                Advance();
                 if (!IsBinaryCharacter(PeekAhead()))
                 {
                     break;
@@ -803,7 +803,7 @@ namespace Treesnake.Parser
                     break;
                 }
 
-                SkipAhead();
+                Advance();
             }
 
             return CreateToken(TokenType.IntegerLiteral, startOffset, currentLine, startColumn, input.Substring(startOffset, currentOffset - startOffset + 1));
@@ -827,7 +827,7 @@ namespace Treesnake.Parser
             int startOffset = currentOffset;
             int startLine = currentLine;
             int startColumn = currentColumn;
-            SkipAhead(isThreeQuoted ? 3 : 1);
+            Advance(isThreeQuoted ? 3 : 1);
             int stringStartOffset = currentOffset;
             bool isEscaping = false;
             while (currentOffset < input.Length)
@@ -870,13 +870,13 @@ namespace Treesnake.Parser
                         if (isThreeQuoted)
                         {
                             // Necessary to reach the end of the three quoted literal.
-                            SkipAhead(2);
+                            Advance(2);
                         }
                         return CreateToken(TokenType.StringLiteral, startOffset, startLine, startColumn, value);
                     }
                 }
 
-                SkipAhead();
+                Advance();
             }
 
             if (isThreeQuoted)

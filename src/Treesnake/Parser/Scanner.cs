@@ -128,7 +128,7 @@ namespace Treesnake.Parser
 
                     case '#':
                         // Skip to end of line or end of input.
-                        token = DoComment();
+                        DoComment();
                         break;
 
                     case '\n':

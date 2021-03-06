@@ -319,7 +319,6 @@ namespace Tests
             string input = "# Hello world";
             Token[] expected =
             {
-                new Token(TokenType.Comment, 0, 1, 1, "# Hello world"),
                 new Token(TokenType.EndMarker, 13, 1, 14)
             };
 
@@ -329,7 +328,6 @@ namespace Tests
             input = "# Hello world\n";
             expected = new Token[]
             {
-                new Token(TokenType.Comment, 0, 1, 1, "# Hello world"),
                 new Token(TokenType.EndMarker, 14, 2, 1)
             };
 
@@ -339,7 +337,6 @@ namespace Tests
             input = "  # Hello world";
             expected = new Token[]
             {
-                new Token(TokenType.Comment, 2, 1, 3, "# Hello world"),
                 new Token(TokenType.EndMarker, 15, 1, 16)
             };
 
@@ -350,7 +347,6 @@ namespace Tests
             expected = new Token[]
             {
                 new Token(TokenType.Name, 0, 1, 1, "a"),
-                new Token(TokenType.Comment, 3, 1, 4, "# Hello world"),
                 new Token(TokenType.Newline, 16, 1, 17),
                 new Token(TokenType.EndMarker, 17, 2, 1)
             };
@@ -363,7 +359,6 @@ namespace Tests
             {
                 new Token(TokenType.Name, 0, 1, 1, "a"),
                 new Token(TokenType.Newline, 1, 1, 2),
-                new Token(TokenType.Comment, 2, 2, 1, "# Hello world"),
                 new Token(TokenType.EndMarker, 16, 3, 1)
             };
 
